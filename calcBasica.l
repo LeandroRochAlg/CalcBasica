@@ -2,72 +2,223 @@
 
 %{
 #include <stdio.h>
-#include <stdlib.h>  // Para atoi() e atof()
-#include <string.h>  // Para strdup()
+#include <stdlib.h>
+#include <string.h>
 #include "tokens.h"
 
-FILE *outFile;  // Ponteiro para o arquivo de saída
+// Definição do nó da árvore
+typedef struct Node {
+    char *token;
+    struct Node **children;
+    int child_count;
+} Node;
 
-// Definir a união yylval com os tipos de dados usados
+// Funções para manipular a árvore
+Node* create_node(const char *token) {
+    Node *new_node = malloc(sizeof(Node));
+    new_node->token = strdup(token);
+    new_node->children = NULL;
+    new_node->child_count = 0;
+    return new_node;
+}
+
+void add_child(Node *parent, Node *child) {
+    parent->children = realloc(parent->children, sizeof(Node*) * (parent->child_count + 1));
+    parent->children[parent->child_count] = child;
+    parent->child_count++;
+}
+
+void free_tree(Node *node) {
+    for (int i = 0; i < node->child_count; i++) {
+        free_tree(node->children[i]);
+    }
+    free(node->token);
+    free(node->children);
+    free(node);
+}
+
+void save_tree(Node *node, FILE *file, int depth, int is_last) {
+    if (node == NULL) return;
+
+    // Print the current node
+    for (int i = 0; i < depth - 1; i++) {
+        fprintf(file, "│   ");
+    }
+
+    if (depth > 0) {
+        if (is_last) {
+            fprintf(file, "└── ");
+        } else {
+            fprintf(file, "├── ");
+        }
+    }
+
+    fprintf(file, "%s\n", node->token);
+
+    // Process children
+    for (int i = 0; i < node->child_count; i++) {
+        save_tree(node->children[i], file, depth + 1, i == node->child_count - 1);
+    }
+}
+
+// Função para empilhar subárvores
+typedef struct TreeStack {
+    Node **nodes;
+    int top;
+    int capacity;
+} TreeStack;
+
+TreeStack* create_stack(int capacity) {
+    TreeStack *stack = malloc(sizeof(TreeStack));
+    stack->nodes = malloc(sizeof(Node*) * capacity);
+    stack->top = -1;
+    stack->capacity = capacity;
+    return stack;
+}
+
+int is_empty(TreeStack *stack) {
+    return stack->top == -1;
+}
+
+void push(TreeStack *stack, Node *node) {
+    if (stack->top == stack->capacity - 1) {
+        stack->capacity *= 2;
+        stack->nodes = realloc(stack->nodes, sizeof(Node*) * stack->capacity);
+    }
+    stack->nodes[++stack->top] = node;
+}
+
+Node* pop(TreeStack *stack) {
+    if (is_empty(stack)) return NULL;
+    return stack->nodes[stack->top--];
+}
+
+Node* peek(TreeStack *stack) {
+    if (is_empty(stack)) return NULL;
+    return stack->nodes[stack->top];
+}
+
+void free_stack(TreeStack *stack) {
+    free(stack->nodes);
+    free(stack);
+}
+
+// Variáveis globais
+FILE *outFile;
+FILE *treeFile; // Arquivo para salvar a árvore
+Node *root;  // Raiz da árvore
+TreeStack *tree_stack;  // Pilha para gerenciar subárvores
+
 typedef union {
     int inteiro;
     float real;
     char* str;
 } YYSTYPE;
 
-YYSTYPE yylval;  // Declaração da variável yylval
+YYSTYPE yylval;
 
-// Função strdup para sistemas que não a suportam nativamente
 char* strdup(const char* s) {
-    char* d = malloc(strlen(s) + 1);  // Aloca espaço suficiente
-    if (d == NULL) return NULL;       // Verifica erro de alocação
-    strcpy(d, s);                     // Copia a string original
+    char* d = malloc(strlen(s) + 1);
+    if (d == NULL) return NULL;
+    strcpy(d, s);
     return d;
 }
+
 %}
 
 %%
 
-PROGRAMA                { printf("Token PROGRAMA encontrado\n"); fprintf(outFile, "PROGRAMA_TOK\n"); /*return PROGRAMA_TOK;*/ }
-INICIO                  { printf("Token INICIO encontrado\n"); fprintf(outFile, "INICIO_TOK\n"); /*return INICIO_TOK;*/ }
-FIM                     { printf("Token FIM encontrado\n"); fprintf(outFile, "FIM_TOK\n"); /*return FIM_TOK;*/ }
-DECLARACOES             { printf("Token DECLARACOES encontrado\n"); fprintf(outFile, "DECLARACOES_TOK\n"); /*return DECLARACOES_TOK;*/ }
-ALGORITMO               { printf("Token ALGORITMO encontrado\n"); fprintf(outFile, "ALGORITMO_TOK\n"); /*return ALGORITMO_TOK;*/ }
-INTEIRO                 { printf("Token INTEIRO encontrado\n"); fprintf(outFile, "INTEIRO_TOK\n"); /*return INTEIRO_TOK;*/ }
-REAL                    { printf("Token REAL encontrado\n"); fprintf(outFile, "REAL_TOK\n"); /*return REAL_TOK;*/ }
-CARACTER                { printf("Token CARACTER encontrado\n"); fprintf(outFile, "CARACTER_TOK\n"); /*return CARACTER_TOK;*/ }
-CADEIA                  { printf("Token CADEIA encontrado\n"); fprintf(outFile, "CADEIA_TOK\n"); /*return CADEIA_TOK;*/ }
-LISTA_INT               { printf("Token LISTA_INT encontrado\n"); fprintf(outFile, "LISTA_INT_TOK\n"); /*return LISTA_INT_TOK;*/ }
-LISTA_REAL              { printf("Token LISTA_REAL encontrado\n"); fprintf(outFile, "LISTA_REAL_TOK\n"); /*return LISTA_REAL_TOK;*/ }
-LEIA                    { printf("Token LEIA encontrado\n"); fprintf(outFile, "LEIA_TOK\n"); /*return LEIA_TOK;*/ }
-ESCREVA                 { printf("Token ESCREVA encontrado\n"); fprintf(outFile, "ESCREVA_TOK\n"); /*return ESCREVA_TOK;*/ }
-SE                      { printf("Token SE encontrado\n"); fprintf(outFile, "SE_TOK\n"); /*return SE_TOK;*/ }
-ENTAO                   { printf("Token ENTAO encontrado\n"); fprintf(outFile, "ENTAO_TOK\n"); /*return ENTAO_TOK;*/ }
-FIM_SE                  { printf("Token FIM_SE encontrado\n"); fprintf(outFile, "FIM_SE_TOK\n"); /*return FIM_SE_TOK;*/ }
-ENQUANTO                { printf("Token ENQUANTO encontrado\n"); fprintf(outFile, "ENQUANTO_TOK\n"); /*return ENQUANTO_TOK;*/ }
-FIM_ENQUANTO            { printf("Token FIM_ENQUANTO encontrado\n"); fprintf(outFile, "FIM_ENQUANTO_TOK\n"); /*return FIM_ENQUANTO_TOK;*/ }
+PROGRAMA {
+    root = create_node("PROGRAMA");
+    push(tree_stack, root); // Empilha o nó raiz
+}
 
-":="                    { printf("Token ATRIBUICAO encontrado\n"); fprintf(outFile, "ATRIBUICAO_TOK\n"); /*return ATRIBUICAO_TOK;*/ }
-"+"                     { printf("Token MAIS encontrado\n"); fprintf(outFile, "MAIS_TOK\n"); /*return MAIS_TOK;*/ }
-"-"                     { printf("Token MENOS encontrado\n"); fprintf(outFile, "MENOS_TOK\n"); /*return MENOS_TOK;*/ }
-"*"                     { printf("Token MULTIPLICA encontrado\n"); fprintf(outFile, "MULTIPLICA_TOK\n"); /*return MULTIPLICA_TOK;*/ }
-"/"                     { printf("Token DIVIDE encontrado\n"); fprintf(outFile, "DIVIDE_TOK\n"); /*return DIVIDE_TOK;*/ }
-"%"                     { printf("Token RESTO encontrado\n"); fprintf(outFile, "RESTO_TOK\n"); /*return RESTO_TOK;*/ }
+INICIO {
+    Node *node = create_node("INICIO");
+    add_child(peek(tree_stack), node);
+}
 
-"\.M\."                 { printf("Token MAIOR encontrado\n"); fprintf(outFile, "MAIOR_TOK\n"); /*return MAIOR_TOK;*/ }
-"\.I\."                 { printf("Token IGUAL encontrado\n"); fprintf(outFile, "IGUAL_TOK\n"); /*return IGUAL_TOK;*/ }
+FIM {
+    Node *node = create_node("FIM");
+    add_child(peek(tree_stack), node);
+}
 
-[0-9]+                  { printf("Token NUM_INT encontrado: %s\n", yytext); fprintf(outFile, "NUM_INT_TOK: %d\n", yylval.inteiro = atoi(yytext)); /*return NUM_INT_TOK;*/ }
-[0-9]+"."[0-9]+         { printf("Token NUM_REAL encontrado: %s\n", yytext); fprintf(outFile, "NUM_REAL_TOK: %f\n", yylval.real = atof(yytext)); /*return NUM_REAL_TOK;*/ }
+DECLARACOES {
+    Node *node = create_node("DECLARACOES");
+    add_child(peek(tree_stack), node);
+    push(tree_stack, node); // Inicia nova subárvore
+}
 
-[a-zA-Z][a-zA-Z0-9]*    { printf("Token IDENT encontrado: %s\n", yytext); fprintf(outFile, "IDENT_TOK: %s\n", yylval.str = strdup(yytext)); /*return IDENT_TOK;*/ }
+FIM_DECLARACOES {
+    pop(tree_stack); // Fecha a subárvore de declarações
+}
 
-\'[^\']*\'              { printf("Token CADEIA encontrado: %s\n", yytext); fprintf(outFile, "CADEIA_TOK: %s\n", yylval.str = strdup(yytext)); /*return CADEIA_TOK;*/ }
+SE {
+    Node *node = create_node("SE");
+    add_child(peek(tree_stack), node);
+    push(tree_stack, node); // Inicia nova subárvore
+}
 
-\{[^\}]*\}              { printf("Comentário encontrado\n"); /* Ignorar comentários */ }
+FIM_SE {
+    pop(tree_stack); // Fecha a subárvore SE
+}
 
-[ \t]+                  { printf("Espaço em branco encontrado\n"); /* Ignorar espaços em branco */ }
-\n                      { printf("Quebra de linha encontrada\n"); /* Ignorar quebras de linha */ }
+ENQUANTO {
+    Node *node = create_node("ENQUANTO");
+    add_child(peek(tree_stack), node);
+    push(tree_stack, node); // Inicia nova subárvore
+}
+
+FIM_ENQUANTO {
+    pop(tree_stack); // Fecha a subárvore ENQUANTO
+}
+
+INTEIRO {
+    Node *node = create_node("INTEIRO");
+    add_child(peek(tree_stack), node);
+}
+REAL {
+    Node *node = create_node("REAL");
+    add_child(peek(tree_stack), node);
+}
+
+LEIA {
+    Node *node = create_node("LEIA");
+    add_child(peek(tree_stack), node);
+}
+
+ESCREVA {
+    Node *node = create_node("ESCREVA");
+    add_child(peek(tree_stack), node);
+}
+
+":=" {
+    Node *node = create_node("ATRIBUICAO");
+    add_child(peek(tree_stack), node);
+}
+
+[0-9]+ {
+    Node *node = create_node("NUM_INT");
+    add_child(peek(tree_stack), node);
+    fprintf(outFile, "NUM_INT_TOK: %d\n", yylval.inteiro = atoi(yytext));
+}
+
+[0-9]+"."[0-9]+ {
+    Node *node = create_node("NUM_REAL");
+    add_child(peek(tree_stack), node);
+    fprintf(outFile, "NUM_REAL_TOK: %f\n", yylval.real = atof(yytext));
+}
+
+[a-zA-Z][a-zA-Z0-9]* {
+    Node *node = create_node("IDENT");
+    add_child(peek(tree_stack), node);
+    fprintf(outFile, "IDENT_TOK: %s\n", yylval.str = strdup(yytext));
+}
+
+\n {
+    /* Ignorar quebras de linha */
+}
+
 %%
 
 int main(int argc, char **argv) {
@@ -83,21 +234,47 @@ int main(int argc, char **argv) {
         return 1;
     }
 
-    // Criar o nome do arquivo de saída com o mesmo nome do arquivo de entrada, mas com "_saida"
+    // Criar o nome do arquivo de saída
     char outFileName[256];
     snprintf(outFileName, sizeof(outFileName), "%s_saida.txt", argv[1]);
 
-    // Abrir o arquivo de saída para escrever os tokens detectados
+    // Abrir o arquivo de saída
     outFile = fopen(outFileName, "w");
     if (!outFile) {
         fprintf(stderr, "Erro ao criar arquivo de saída.\n");
         return 1;
     }
 
-    yylex();  // Chama o analisador léxico
+    // Criar o nome do arquivo para salvar a árvore
+    char treeFileName[256];
+    snprintf(treeFileName, sizeof(treeFileName), "%s_arvore.txt", argv[1]);
 
-    fclose(yyin);      // Fechar o arquivo de entrada
-    fclose(outFile);   // Fechar o arquivo de saída
+    // Abrir o arquivo para salvar a árvore
+    treeFile = fopen(treeFileName, "w");
+    if (!treeFile) {
+        fprintf(stderr, "Erro ao criar arquivo para salvar a árvore.\n");
+        return 1;
+    }
+
+    // Inicializa a raiz da árvore e a pilha de subárvores
+    root = create_node("PROGRAMA");
+    tree_stack = create_stack(10);
+    push(tree_stack, root); // Empilhar a raiz
+
+    // Executar o lexer
+    yylex();
+
+    // Salvar a árvore no arquivo
+    save_tree(root, treeFile, 0, 1);
+
+    // Liberar memória
+    free_tree(root);
+    free_stack(tree_stack);
+
+    // Fechar arquivos
+    fclose(outFile);
+    fclose(treeFile);
+    fclose(yyin);
 
     return 0;
 }

@@ -1,0 +1,46 @@
+PROGRAMA
+├── IDENT
+├── IDENT
+├── INICIO
+└── DECLARACOES
+│   ├── INTEIRO
+│   ├── IDENT
+│   ├── IDENT
+│   ├── IDENT
+│   ├── IDENT
+│   ├── IDENT
+│   ├── IDENT
+│   ├── IDENT
+│   ├── IDENT
+│   ├── IDENT
+│   ├── IDENT
+│   ├── IDENT
+│   ├── LEIA
+│   ├── IDENT
+│   ├── IDENT
+│   ├── ATRIBUICAO
+│   ├── IDENT
+│   ├── SE
+│   │   ├── IDENT
+│   │   ├── IDENT
+│   │   ├── NUM_INT
+│   │   ├── IDENT
+│   │   ├── IDENT
+│   │   ├── ATRIBUICAO
+│   │   └── NUM_INT
+│   ├── ENQUANTO
+│   │   ├── IDENT
+│   │   ├── IDENT
+│   │   ├── NUM_INT
+│   │   ├── IDENT
+│   │   ├── ATRIBUICAO
+│   │   ├── IDENT
+│   │   ├── IDENT
+│   │   ├── IDENT
+│   │   ├── ATRIBUICAO
+│   │   ├── IDENT
+│   │   └── NUM_INT
+│   ├── ESCREVA
+│   ├── IDENT
+│   ├── IDENT
+│   └── FIM
