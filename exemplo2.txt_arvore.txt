@@ -1,0 +1,82 @@
+PROGRAMA
+├── IDENT
+├── IDENT
+├── IDENT
+├── INICIO
+└── DECLARACOES
+│   ├── INTEIRO
+│   ├── IDENT
+│   ├── IDENT
+│   ├── IDENT
+│   ├── IDENT
+│   ├── IDENT
+│   ├── IDENT
+│   ├── IDENT
+│   ├── NUM_INT
+│   ├── IDENT
+│   ├── IDENT
+│   ├── IDENT
+│   ├── IDENT
+│   ├── IDENT
+│   ├── IDENT
+│   ├── ESCREVA
+│   ├── IDENT
+│   ├── IDENT
+│   ├── IDENT
+│   ├── IDENT
+│   ├── IDENT
+│   ├── LEIA
+│   ├── IDENT
+│   ├── IDENT
+│   ├── ATRIBUICAO
+│   ├── NUM_INT
+│   ├── IDENT
+│   ├── ATRIBUICAO
+│   ├── NUM_INT
+│   ├── ENQUANTO
+│   │   ├── IDENT
+│   │   ├── IDENT
+│   │   ├── IDENT
+│   │   ├── LEIA
+│   │   ├── IDENT
+│   │   ├── IDENT
+│   │   ├── IDENT
+│   │   ├── ATRIBUICAO
+│   │   ├── IDENT
+│   │   ├── IDENT
+│   │   ├── IDENT
+│   │   ├── IDENT
+│   │   ├── ATRIBUICAO
+│   │   ├── IDENT
+│   │   └── NUM_INT
+│   ├── IDENT
+│   ├── IDENT
+│   ├── IDENT
+│   ├── IDENT
+│   ├── IDENT
+│   ├── ESCREVA
+│   ├── IDENT
+│   ├── IDENT
+│   ├── IDENT
+│   ├── ATRIBUICAO
+│   ├── NUM_INT
+│   └── ENQUANTO
+│   │   ├── IDENT
+│   │   ├── IDENT
+│   │   ├── IDENT
+│   │   ├── ESCREVA
+│   │   ├── IDENT
+│   │   ├── IDENT
+│   │   ├── IDENT
+│   │   ├── ATRIBUICAO
+│   │   ├── IDENT
+│   │   ├── NUM_INT
+│   │   ├── FIM
+│   │   └── ENQUANTO
+│   │   │   ├── ESCREVA
+│   │   │   ├── IDENT
+│   │   │   ├── IDENT
+│   │   │   ├── IDENT
+│   │   │   ├── IDENT
+│   │   │   ├── IDENT
+│   │   │   └── FIM
