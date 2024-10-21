@@ -6,14 +6,12 @@
 #include <string.h>
 #include "tokens.h"
 
-// Definição do nó da árvore
 typedef struct Node {
     char *token;
     struct Node **children;
     int child_count;
 } Node;
 
-// Funções para manipular a árvore
 Node* create_node(const char *token) {
     Node *new_node = malloc(sizeof(Node));
     new_node->token = strdup(token);
@@ -40,7 +38,6 @@ void free_tree(Node *node) {
 void save_tree(Node *node, FILE *file, int depth, int is_last) {
     if (node == NULL) return;
 
-    // Print the current node
     for (int i = 0; i < depth - 1; i++) {
         fprintf(file, "│   ");
     }
@@ -55,13 +52,11 @@ void save_tree(Node *node, FILE *file, int depth, int is_last) {
 
     fprintf(file, "%s\n", node->token);
 
-    // Process children
     for (int i = 0; i < node->child_count; i++) {
         save_tree(node->children[i], file, depth + 1, i == node->child_count - 1);
     }
 }
 
-// Função para empilhar subárvores
 typedef struct TreeStack {
     Node **nodes;
     int top;
@@ -103,11 +98,10 @@ void free_stack(TreeStack *stack) {
     free(stack);
 }
 
-// Variáveis globais
 FILE *outFile;
-FILE *treeFile; // Arquivo para salvar a árvore
-Node *root;  // Raiz da árvore
-TreeStack *tree_stack;  // Pilha para gerenciar subárvores
+FILE *treeFile; 
+Node *root;  
+TreeStack *tree_stack;  
 
 typedef union {
     int inteiro;
@@ -128,85 +122,121 @@ char* strdup(const char* s) {
 
 %%
 
+
 PROGRAMA {
     root = create_node("PROGRAMA");
-    push(tree_stack, root); // Empilha o nó raiz
+    push(tree_stack, root);
+    fprintf(outFile, "PROGRAMA\n");
 }
 
 INICIO {
     Node *node = create_node("INICIO");
     add_child(peek(tree_stack), node);
+    fprintf(outFile, "INICIO\n");
 }
 
 FIM {
     Node *node = create_node("FIM");
     add_child(peek(tree_stack), node);
+    fprintf(outFile, "FIM\n");
 }
 
 DECLARACOES {
     Node *node = create_node("DECLARACOES");
     add_child(peek(tree_stack), node);
-    push(tree_stack, node); // Inicia nova subárvore
+    push(tree_stack, node);
+    fprintf(outFile, "DECLARACOES\n");
 }
 
 FIM_DECLARACOES {
-    pop(tree_stack); // Fecha a subárvore de declarações
+    Node *node = create_node("FIM_DECLARACOES");
+    add_child(peek(tree_stack), node);
+    pop(tree_stack);
+    fprintf(outFile, "FIM_DECLARACOES\n");
+}
+
+ALGORITMO {
+    Node *node = create_node("ALGORITMO");
+    add_child(peek(tree_stack), node);
+    push(tree_stack, node);
+    fprintf(outFile, "ALGORITMO\n");
+}
+
+FIM_ALGORITMO {
+    Node *node = create_node("FIM_ALGORITMO");
+    add_child(peek(tree_stack), node);
+    pop(tree_stack);
+    fprintf(outFile, "FIM_ALGORITMO\n");
 }
 
 SE {
     Node *node = create_node("SE");
     add_child(peek(tree_stack), node);
-    push(tree_stack, node); // Inicia nova subárvore
+    push(tree_stack, node);
+    fprintf(outFile, "SE\n");
 }
 
 FIM_SE {
-    pop(tree_stack); // Fecha a subárvore SE
+    Node *node = create_node("FIM_SE");
+    add_child(peek(tree_stack), node);
+    pop(tree_stack);
+    fprintf(outFile, "FIM_SE\n");
 }
 
 ENQUANTO {
     Node *node = create_node("ENQUANTO");
     add_child(peek(tree_stack), node);
-    push(tree_stack, node); // Inicia nova subárvore
+    push(tree_stack, node);
+    fprintf(outFile, "ENQUANTO\n");
 }
 
 FIM_ENQUANTO {
-    pop(tree_stack); // Fecha a subárvore ENQUANTO
+    Node *node = create_node("FIM_ENQUANTO");
+    add_child(peek(tree_stack), node);
+    pop(tree_stack);
+    fprintf(outFile, "FIM_ENQUANTO\n");
 }
 
 INTEIRO {
     Node *node = create_node("INTEIRO");
     add_child(peek(tree_stack), node);
+    fprintf(outFile, "INTEIRO\n");
 }
+
 REAL {
     Node *node = create_node("REAL");
     add_child(peek(tree_stack), node);
+    fprintf(outFile, "REAL\n");
 }
 
 LEIA {
     Node *node = create_node("LEIA");
     add_child(peek(tree_stack), node);
+    fprintf(outFile, "LEIA\n");
 }
 
 ESCREVA {
     Node *node = create_node("ESCREVA");
     add_child(peek(tree_stack), node);
+    fprintf(outFile, "ESCREVA\n");
 }
 
 ":=" {
     Node *node = create_node("ATRIBUICAO");
     add_child(peek(tree_stack), node);
+    fprintf(outFile, "ATRIBUICAO\n");
 }
 
 [0-9]+ {
     Node *node = create_node("NUM_INT");
     add_child(peek(tree_stack), node);
-    fprintf(outFile, "NUM_INT_TOK: %d\n", yylval.inteiro = atoi(yytext));
+    fprintf(outFile, "NUM_INT: %d\n", yylval.inteiro = atoi(yytext));
 }
 
 [0-9]+"."[0-9]+ {
     Node *node = create_node("NUM_REAL");
     add_child(peek(tree_stack), node);
-    fprintf(outFile, "NUM_REAL_TOK: %f\n", yylval.real = atof(yytext));
+    fprintf(outFile, "NUM_REAL: %f\n", yylval.real = atof(yytext));
 }
 
 [a-zA-Z][a-zA-Z0-9]* {
@@ -216,7 +246,6 @@ ESCREVA {
 }
 
 \n {
-    /* Ignorar quebras de linha */
 }
 
 %%
@@ -227,54 +256,43 @@ int main(int argc, char **argv) {
         return 1;
     }
 
-    // Abrir o arquivo de entrada
     yyin = fopen(argv[1], "r");
     if (!yyin) {
         fprintf(stderr, "Erro ao abrir arquivo %s\n", argv[1]);
         return 1;
     }
 
-    // Criar o nome do arquivo de saída
     char outFileName[256];
     snprintf(outFileName, sizeof(outFileName), "%s_saida.txt", argv[1]);
 
-    // Abrir o arquivo de saída
     outFile = fopen(outFileName, "w");
     if (!outFile) {
-        fprintf(stderr, "Erro ao criar arquivo de saída.\n");
+        fprintf(stderr, "Erro ao criar arquivo de saída %s\n", outFileName);
         return 1;
     }
 
-    // Criar o nome do arquivo para salvar a árvore
     char treeFileName[256];
-    snprintf(treeFileName, sizeof(treeFileName), "%s_arvore.txt", argv[1]);
+    snprintf(treeFileName, sizeof(treeFileName), "%s_arvore_sintatica.txt", argv[1]);
 
-    // Abrir o arquivo para salvar a árvore
-    treeFile = fopen(treeFileName, "w");
+    FILE *treeFile = fopen(treeFileName, "w");
     if (!treeFile) {
-        fprintf(stderr, "Erro ao criar arquivo para salvar a árvore.\n");
+        fprintf(stderr, "Erro ao criar arquivo de árvore sintática %s\n", treeFileName);
+        fclose(outFile);
         return 1;
     }
 
-    // Inicializa a raiz da árvore e a pilha de subárvores
-    root = create_node("PROGRAMA");
-    tree_stack = create_stack(10);
-    push(tree_stack, root); // Empilhar a raiz
+    tree_stack = create_stack(100);
 
-    // Executar o lexer
     yylex();
 
-    // Salvar a árvore no arquivo
     save_tree(root, treeFile, 0, 1);
 
-    // Liberar memória
-    free_tree(root);
-    free_stack(tree_stack);
-
-    // Fechar arquivos
     fclose(outFile);
     fclose(treeFile);
     fclose(yyin);
+
+    free_tree(root);
+    free_stack(tree_stack);
 
     return 0;
 }
