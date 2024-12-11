@@ -533,7 +533,7 @@ char *yytext;
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "analisadorSintatico.tab.h"
+#include "analisadorSemantico.tab.h"
 
 // Arquivo de saída para os tokens
 FILE *outFile;
