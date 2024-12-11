@@ -285,41 +285,43 @@ static void yy_fatal_error YY_PROTO(( yyconst char msg[] ));
 	*yy_cp = '\0'; \
 	yy_c_buf_p = yy_cp;
 
-#define YY_NUM_RULES 21
-#define YY_END_OF_BUFFER 22
-static yyconst short int yy_accept[112] =
+#define YY_NUM_RULES 34
+#define YY_END_OF_BUFFER 35
+static yyconst short int yy_accept[134] =
     {   0,
-        0,    0,   22,   21,   20,   17,   21,   19,   19,   19,
-       19,   19,   19,   19,   19,   19,   19,    0,   17,   16,
-       19,   19,   19,   19,   19,   19,   19,   19,   19,   19,
-        8,   18,   19,   19,   19,   19,    3,   19,   19,   19,
-       19,   19,   19,   19,   19,   19,    0,   19,   19,   14,
-       19,   13,   19,   19,   19,   19,    0,    0,    0,    0,
-       19,   19,   19,   19,   19,   19,   19,    0,    0,    0,
-        9,    2,   19,   19,   19,   19,   19,   15,    0,    0,
-        0,   12,   19,   19,   19,   10,    0,    0,    0,    1,
-        6,   19,    0,    0,    0,   19,    0,    0,    0,    4,
+        0,    0,   35,   33,   31,   32,   24,   33,   22,   20,
+       21,   33,   23,   27,   33,   29,   29,   29,   29,   29,
+       29,   29,   29,   29,   29,   29,   31,    0,   30,    0,
+        0,    0,   27,   19,   29,   29,   29,   29,   29,   29,
+       29,   29,   29,   29,   29,   29,   14,   26,   25,   28,
+       29,   29,   29,   29,   29,   29,   29,    3,   29,   29,
+       29,   29,   29,   29,   29,   29,   29,   29,   29,   29,
+       29,    0,   29,   29,   12,   29,   29,    7,   29,   29,
+       29,   29,   29,   15,   29,    0,    0,   29,   29,   29,
+       29,   29,    9,   29,   29,   29,   29,    0,   16,    2,
 
-        0,    0,    0,    0,    0,   11,    7,    0,    0,    5,
-        0
+       29,    0,   29,   29,   29,   29,   29,   13,    0,    6,
+        0,    0,   29,   29,    8,   29,   17,    0,    0,    0,
+        1,    5,   29,    0,   10,    0,   29,    0,   11,    4,
+        0,   18,    0
     } ;
 
 static yyconst int yy_ec[256] =
     {   0,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    2,
+        1,    1,    1,    1,    1,    1,    1,    1,    2,    3,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    3,    1,    4,    4,    4,
-        4,    4,    4,    4,    4,    4,    4,    5,    1,    1,
-        6,    1,    1,    1,    7,    8,    9,   10,   11,   12,
-       13,    8,   14,    8,    8,   15,   16,   17,   18,   19,
-       20,   21,   22,   23,   24,   25,    8,    8,    8,    8,
-        1,    1,    1,    1,   26,    1,    8,    8,    8,    8,
+        1,    2,    1,    1,    1,    1,    4,    1,    5,    1,
+        1,    6,    7,    1,    8,    9,   10,   11,   11,   11,
+       11,   11,   11,   11,   11,   11,   11,   12,    1,    1,
+       13,    1,    1,    1,   14,   15,   16,   17,   18,   19,
+       20,   15,   21,   15,   15,   22,   23,   24,   25,   26,
+       27,   28,   29,   30,   31,   32,   15,   15,   15,   15,
+        1,    1,    1,    1,   33,    1,   15,   15,   15,   15,
 
-        8,    8,    8,    8,    8,    8,    8,    8,    8,    8,
-        8,    8,    8,    8,    8,    8,    8,    8,    8,    8,
-        8,    8,    1,    1,    1,    1,    1,    1,    1,    1,
+       15,   15,   15,   15,   15,   15,   15,   15,   15,   15,
+       15,   15,   15,   15,   15,   15,   15,   15,   15,   15,
+       15,   15,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -336,85 +338,96 @@ static yyconst int yy_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static yyconst int yy_meta[27] =
+static yyconst int yy_meta[34] =
     {   0,
-        1,    1,    1,    2,    1,    1,    2,    2,    2,    2,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        2,    1,    1,    2,    2,    2,    2,    2,    2,    2,
         2,    2,    2,    2,    2,    2,    2,    2,    2,    2,
-        2,    2,    2,    2,    2,    1
+        2,    2,    1
     } ;
 
-static yyconst short int yy_base[113] =
+static yyconst short int yy_base[136] =
     {   0,
-        0,    0,  123,  124,  124,   24,  116,  106,    0,  109,
-       12,  105,  101,  106,   95,  104,  103,  109,   27,  124,
-        0,   99,  102,   90,  100,   92,   18,   93,   88,   98,
-        0,  100,   85,   87,   77,   79,   73,   89,   86,   89,
-       82,   79,   72,   85,   84,   79,   35,   75,   74,    0,
-       66,    0,   72,   64,   67,   58,   67,   70,   63,   68,
-       60,   56,   69,   52,   67,   50,   65,   58,   61,   49,
-      124,    0,   50,   51,   50,   56,   46,    0,   45,   47,
-       37,    0,   53,   41,   40,    0,   35,   48,   47,    0,
-        0,   42,   38,   30,   33,   27,   25,   40,   21,    0,
+        0,    0,  146,  147,  143,  147,  147,  139,  147,  147,
+      147,   13,  147,   26,  130,  120,    0,  127,  122,   14,
+      118,  114,   21,  109,  118,  117,  132,  128,  147,  123,
+      122,  119,   35,  147,    0,  109,   23,  112,   18,  111,
+      103,   20,  104,   95,   98,  108,    0,  147,  147,  110,
+       95,  101,  104,   95,   85,  101,   86,   80,   96,   93,
+       96,   79,   88,   85,   78,   84,   88,   89,   88,   76,
+       82,   29,   78,   77,    0,   83,   68,    0,   74,   80,
+       63,   64,   67,    0,   58,   65,   70,   62,   58,   52,
+       70,   53,    0,   64,   67,   50,   65,   51,  147,    0,
 
-       27,   31,   21,   20,   19,  124,  124,   25,   13,  124,
-      124,   31
+       52,   28,   53,   52,   46,   57,   47,    0,   40,    0,
+       46,   51,   54,   42,    0,   41,    0,   51,   34,   49,
+        0,    0,   44,   37,  147,   35,   26,   24,  147,    0,
+       28,  147,  147,   58,   50
     } ;
 
-static yyconst short int yy_def[113] =
+static yyconst short int yy_def[136] =
     {   0,
-      111,    1,  111,  111,  111,  111,  111,  112,  112,  112,
-      112,  112,  112,  112,  112,  112,  112,  111,  111,  111,
-      112,  112,  112,  112,  112,  112,  112,  112,  112,  112,
-      112,  111,  112,  112,  112,  112,  112,  112,  112,  112,
-      112,  112,  112,  112,  112,  112,  111,  112,  112,  112,
-      112,  112,  112,  112,  112,  112,  111,  111,  111,  111,
-      112,  112,  112,  112,  112,  112,  112,  111,  111,  111,
-      111,  112,  112,  112,  112,  112,  112,  112,  111,  111,
-      111,  112,  112,  112,  112,  112,  111,  111,  111,  112,
-      112,  112,  111,  111,  111,  112,  111,  111,  111,  112,
+      133,    1,  133,  133,  133,  133,  133,  134,  133,  133,
+      133,  133,  133,  133,  133,  135,  135,  135,  135,  135,
+      135,  135,  135,  135,  135,  135,  133,  134,  133,  133,
+      133,  133,  133,  133,  135,  135,  135,  135,  135,  135,
+      135,  135,  135,  135,  135,  135,  135,  133,  133,  133,
+      135,  135,  135,  135,  135,  135,  135,  135,  135,  135,
+      135,  135,  135,  135,  135,  135,  135,  135,  135,  135,
+      135,  133,  135,  135,  135,  135,  135,  135,  135,  135,
+      135,  135,  135,  135,  135,  133,  133,  135,  135,  135,
+      135,  135,  135,  135,  135,  135,  135,  133,  133,  135,
 
-      111,  111,  111,  111,  111,  111,  111,  111,  111,  111,
-        0,  111
+      135,  133,  135,  135,  135,  135,  135,  135,  133,  135,
+      133,  133,  135,  135,  135,  135,  135,  133,  133,  133,
+      135,  135,  135,  133,  133,  133,  135,  133,  133,  135,
+      133,  133,    0,  133,  133
     } ;
 
-static yyconst short int yy_nxt[151] =
+static yyconst short int yy_nxt[181] =
     {   0,
-        4,    5,    4,    6,    7,    4,    8,    9,    9,   10,
-       11,   12,    9,   13,   14,    9,    9,    9,   15,    9,
-       16,   17,    9,    9,    9,    4,   18,   19,   24,   18,
-       19,   38,   21,   25,  110,  109,  108,  107,  106,  105,
-       39,   57,  104,  103,   58,   59,  102,  101,  100,   99,
-       98,   97,   96,   95,   94,   93,   60,   92,   91,   90,
-       89,   88,   87,   86,   85,   84,   83,   82,   81,   80,
-       79,   78,   77,   76,   75,   74,   73,   72,   71,   70,
-       69,   68,   67,   66,   65,   64,   63,   62,   61,   56,
-       55,   54,   53,   52,   51,   50,   49,   48,   47,   46,
+        4,    5,    6,    7,    8,    9,   10,   11,   12,   13,
+       14,   15,    4,   16,   17,   18,   19,   20,   21,   17,
+       22,   23,   17,   17,   17,   24,   17,   25,   26,   17,
+       17,   17,    4,   30,   32,   31,   33,   39,   43,   52,
+       59,   44,   40,   32,   55,   33,   86,   56,  111,   60,
+       53,   35,  132,  131,  130,  112,  129,   87,   28,   28,
+      128,  127,  126,  125,  124,  123,  122,  121,  120,  119,
+      118,  117,  116,  115,  114,  113,  110,  109,  108,  107,
+      106,  105,  104,  103,  102,  101,  100,   99,   98,   97,
+       96,   95,   94,   93,   92,   91,   90,   89,   88,   85,
 
-       45,   44,   43,   32,   42,   41,   40,   37,   36,   35,
-       34,   33,   32,   31,   30,   29,   28,   27,   26,   23,
-       22,   20,  111,    3,  111,  111,  111,  111,  111,  111,
-      111,  111,  111,  111,  111,  111,  111,  111,  111,  111,
-      111,  111,  111,  111,  111,  111,  111,  111,  111,  111
+       84,   83,   82,   81,   80,   79,   78,   77,   76,   75,
+       74,   73,   72,   71,   70,   69,   68,   67,   66,   65,
+       50,   64,   63,   62,   61,   58,   57,   54,   51,   50,
+       49,   48,   29,   27,   47,   46,   45,   42,   41,   38,
+       37,   36,   34,   29,   27,  133,    3,  133,  133,  133,
+      133,  133,  133,  133,  133,  133,  133,  133,  133,  133,
+      133,  133,  133,  133,  133,  133,  133,  133,  133,  133,
+      133,  133,  133,  133,  133,  133,  133,  133,  133,  133
     } ;
 
-static yyconst short int yy_chk[151] =
+static yyconst short int yy_chk[181] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    6,    6,   11,   19,
-       19,   27,  112,   11,  109,  108,  105,  104,  103,  102,
-       27,   47,  101,   99,   47,   47,   98,   97,   96,   95,
-       94,   93,   92,   89,   88,   87,   47,   85,   84,   83,
-       81,   80,   79,   77,   76,   75,   74,   73,   70,   69,
-       68,   67,   66,   65,   64,   63,   62,   61,   60,   59,
-       58,   57,   56,   55,   54,   53,   51,   49,   48,   46,
-       45,   44,   43,   42,   41,   40,   39,   38,   37,   36,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,   12,   14,   12,   14,   20,   23,   37,
+       42,   23,   20,   33,   39,   33,   72,   39,  102,   42,
+       37,  135,  131,  128,  127,  102,  126,   72,  134,  134,
+      124,  123,  120,  119,  118,  116,  114,  113,  112,  111,
+      109,  107,  106,  105,  104,  103,  101,   98,   97,   96,
+       95,   94,   92,   91,   90,   89,   88,   87,   86,   85,
+       83,   82,   81,   80,   79,   77,   76,   74,   73,   71,
 
-       35,   34,   33,   32,   30,   29,   28,   26,   25,   24,
-       23,   22,   18,   17,   16,   15,   14,   13,   12,   10,
-        8,    7,    3,  111,  111,  111,  111,  111,  111,  111,
-      111,  111,  111,  111,  111,  111,  111,  111,  111,  111,
-      111,  111,  111,  111,  111,  111,  111,  111,  111,  111
+       70,   69,   68,   67,   66,   65,   64,   63,   62,   61,
+       60,   59,   58,   57,   56,   55,   54,   53,   52,   51,
+       50,   46,   45,   44,   43,   41,   40,   38,   36,   32,
+       31,   30,   28,   27,   26,   25,   24,   22,   21,   19,
+       18,   16,   15,    8,    5,    3,  133,  133,  133,  133,
+      133,  133,  133,  133,  133,  133,  133,  133,  133,  133,
+      133,  133,  133,  133,  133,  133,  133,  133,  133,  133,
+      133,  133,  133,  133,  133,  133,  133,  133,  133,  133
     } ;
 
 static yy_state_type yy_last_accepting_state;
@@ -428,127 +441,18 @@ static char *yy_last_accepting_cpos;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "calcBasica.l"
+#line 1 "analisadorLexico.l"
 #define INITIAL 0
-#line 4 "calcBasica.l"
+#line 4 "analisadorLexico.l"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "tokens.h"
 
-typedef struct Node {
-    char *token;
-    struct Node **children;
-    int child_count;
-} Node;
-
-Node* create_node(const char *token) {
-    Node *new_node = malloc(sizeof(Node));
-    new_node->token = strdup(token);
-    new_node->children = NULL;
-    new_node->child_count = 0;
-    return new_node;
-}
-
-void add_child(Node *parent, Node *child) {
-    parent->children = realloc(parent->children, sizeof(Node*) * (parent->child_count + 1));
-    parent->children[parent->child_count] = child;
-    parent->child_count++;
-}
-
-void free_tree(Node *node) {
-    for (int i = 0; i < node->child_count; i++) {
-        free_tree(node->children[i]);
-    }
-    free(node->token);
-    free(node->children);
-    free(node);
-}
-
-void save_tree(Node *node, FILE *file, int depth, int is_last) {
-    if (node == NULL) return;
-
-    for (int i = 0; i < depth - 1; i++) {
-        fprintf(file, "│   ");
-    }
-
-    if (depth > 0) {
-        if (is_last) {
-            fprintf(file, "└── ");
-        } else {
-            fprintf(file, "├── ");
-        }
-    }
-
-    fprintf(file, "%s\n", node->token);
-
-    for (int i = 0; i < node->child_count; i++) {
-        save_tree(node->children[i], file, depth + 1, i == node->child_count - 1);
-    }
-}
-
-typedef struct TreeStack {
-    Node **nodes;
-    int top;
-    int capacity;
-} TreeStack;
-
-TreeStack* create_stack(int capacity) {
-    TreeStack *stack = malloc(sizeof(TreeStack));
-    stack->nodes = malloc(sizeof(Node*) * capacity);
-    stack->top = -1;
-    stack->capacity = capacity;
-    return stack;
-}
-
-int is_empty(TreeStack *stack) {
-    return stack->top == -1;
-}
-
-void push(TreeStack *stack, Node *node) {
-    if (stack->top == stack->capacity - 1) {
-        stack->capacity *= 2;
-        stack->nodes = realloc(stack->nodes, sizeof(Node*) * stack->capacity);
-    }
-    stack->nodes[++stack->top] = node;
-}
-
-Node* pop(TreeStack *stack) {
-    if (is_empty(stack)) return NULL;
-    return stack->nodes[stack->top--];
-}
-
-Node* peek(TreeStack *stack) {
-    if (is_empty(stack)) return NULL;
-    return stack->nodes[stack->top];
-}
-
-void free_stack(TreeStack *stack) {
-    free(stack->nodes);
-    free(stack);
-}
-
+// Arquivo de saída para os tokens
 FILE *outFile;
-FILE *treeFile; 
-Node *root;  
-TreeStack *tree_stack;  
 
-typedef union {
-    int inteiro;
-    float real;
-    char* str;
-} YYSTYPE;
-
-YYSTYPE yylval;
-
-char* strdup(const char* s) {
-    char* d = malloc(strlen(s) + 1);
-    if (d == NULL) return NULL;
-    strcpy(d, s);
-    return d;
-}
-
-#line 552 "lex.yy.c"
+#line 456 "lex.yy.c"
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -699,11 +603,10 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 123 "calcBasica.l"
+#line 14 "analisadorLexico.l"
 
 
-
-#line 707 "lex.yy.c"
+#line 610 "lex.yy.c"
 
 	if ( yy_init )
 		{
@@ -754,13 +657,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 112 )
+				if ( yy_current_state >= 134 )
 					yy_c = yy_meta[(unsigned int) yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 124 );
+		while ( yy_base[yy_current_state] != 147 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -788,195 +691,175 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 126 "calcBasica.l"
-{
-    root = create_node("PROGRAMA");
-    push(tree_stack, root);
-    fprintf(outFile, "PROGRAMA\n");
-}
+#line 16 "analisadorLexico.l"
+{ fprintf(outFile, "PROGRAMA_TOK\n"); }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 132 "calcBasica.l"
-{
-    Node *node = create_node("INICIO");
-    add_child(peek(tree_stack), node);
-    fprintf(outFile, "INICIO\n");
-}
+#line 17 "analisadorLexico.l"
+{ fprintf(outFile, "INICIO_TOK\n"); }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 138 "calcBasica.l"
-{
-    Node *node = create_node("FIM");
-    add_child(peek(tree_stack), node);
-    fprintf(outFile, "FIM\n");
-}
+#line 18 "analisadorLexico.l"
+{ fprintf(outFile, "FIM_TOK\n"); }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 144 "calcBasica.l"
-{
-    Node *node = create_node("DECLARACOES");
-    add_child(peek(tree_stack), node);
-    push(tree_stack, node);
-    fprintf(outFile, "DECLARACOES\n");
-}
+#line 19 "analisadorLexico.l"
+{ fprintf(outFile, "DECLARACOES_TOK\n"); }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 151 "calcBasica.l"
-{
-    Node *node = create_node("FIM_DECLARACOES");
-    add_child(peek(tree_stack), node);
-    pop(tree_stack);
-    fprintf(outFile, "FIM_DECLARACOES\n");
-}
+#line 20 "analisadorLexico.l"
+{ fprintf(outFile, "ALGORITMO_TOK\n"); }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 158 "calcBasica.l"
-{
-    Node *node = create_node("ALGORITMO");
-    add_child(peek(tree_stack), node);
-    push(tree_stack, node);
-    fprintf(outFile, "ALGORITMO\n");
-}
+#line 21 "analisadorLexico.l"
+{ fprintf(outFile, "INTEIRO_TOK\n"); }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 165 "calcBasica.l"
-{
-    Node *node = create_node("FIM_ALGORITMO");
-    add_child(peek(tree_stack), node);
-    pop(tree_stack);
-    fprintf(outFile, "FIM_ALGORITMO\n");
-}
+#line 22 "analisadorLexico.l"
+{ fprintf(outFile, "REAL_TOK\n"); }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 172 "calcBasica.l"
-{
-    Node *node = create_node("SE");
-    add_child(peek(tree_stack), node);
-    push(tree_stack, node);
-    fprintf(outFile, "SE\n");
-}
+#line 23 "analisadorLexico.l"
+{ fprintf(outFile, "CARACTER_TOK\n"); }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 179 "calcBasica.l"
-{
-    Node *node = create_node("FIM_SE");
-    add_child(peek(tree_stack), node);
-    pop(tree_stack);
-    fprintf(outFile, "FIM_SE\n");
-}
+#line 24 "analisadorLexico.l"
+{ fprintf(outFile, "CADEIA_TOK\n"); }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 186 "calcBasica.l"
-{
-    Node *node = create_node("ENQUANTO");
-    add_child(peek(tree_stack), node);
-    push(tree_stack, node);
-    fprintf(outFile, "ENQUANTO\n");
-}
+#line 25 "analisadorLexico.l"
+{ fprintf(outFile, "LISTA_INT_TOK\n"); }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 193 "calcBasica.l"
-{
-    Node *node = create_node("FIM_ENQUANTO");
-    add_child(peek(tree_stack), node);
-    pop(tree_stack);
-    fprintf(outFile, "FIM_ENQUANTO\n");
-}
+#line 26 "analisadorLexico.l"
+{ fprintf(outFile, "LISTA_REAL_TOK\n"); }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 200 "calcBasica.l"
-{
-    Node *node = create_node("INTEIRO");
-    add_child(peek(tree_stack), node);
-    fprintf(outFile, "INTEIRO\n");
-}
+#line 27 "analisadorLexico.l"
+{ fprintf(outFile, "LEIA_TOK\n"); }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 206 "calcBasica.l"
-{
-    Node *node = create_node("REAL");
-    add_child(peek(tree_stack), node);
-    fprintf(outFile, "REAL\n");
-}
+#line 28 "analisadorLexico.l"
+{ fprintf(outFile, "ESCREVA_TOK\n"); }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 212 "calcBasica.l"
-{
-    Node *node = create_node("LEIA");
-    add_child(peek(tree_stack), node);
-    fprintf(outFile, "LEIA\n");
-}
+#line 29 "analisadorLexico.l"
+{ fprintf(outFile, "SE_TOK\n"); }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 218 "calcBasica.l"
-{
-    Node *node = create_node("ESCREVA");
-    add_child(peek(tree_stack), node);
-    fprintf(outFile, "ESCREVA\n");
-}
+#line 30 "analisadorLexico.l"
+{ fprintf(outFile, "ENTAO_TOK\n"); }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 224 "calcBasica.l"
-{
-    Node *node = create_node("ATRIBUICAO");
-    add_child(peek(tree_stack), node);
-    fprintf(outFile, "ATRIBUICAO\n");
-}
+#line 31 "analisadorLexico.l"
+{ fprintf(outFile, "FIM_SE_TOK\n"); }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 230 "calcBasica.l"
-{
-    Node *node = create_node("NUM_INT");
-    add_child(peek(tree_stack), node);
-    fprintf(outFile, "NUM_INT: %d\n", yylval.inteiro = atoi(yytext));
-}
+#line 32 "analisadorLexico.l"
+{ fprintf(outFile, "ENQUANTO_TOK\n"); }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 236 "calcBasica.l"
-{
-    Node *node = create_node("NUM_REAL");
-    add_child(peek(tree_stack), node);
-    fprintf(outFile, "NUM_REAL: %f\n", yylval.real = atof(yytext));
-}
+#line 33 "analisadorLexico.l"
+{ fprintf(outFile, "FIM_ENQUANTO_TOK\n"); }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 242 "calcBasica.l"
-{
-    Node *node = create_node("IDENT");
-    add_child(peek(tree_stack), node);
-    fprintf(outFile, "IDENT_TOK: %s\n", yylval.str = strdup(yytext));
-}
+#line 35 "analisadorLexico.l"
+{ fprintf(outFile, "ATRIBUICAO_TOK\n"); }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 248 "calcBasica.l"
-{
-}
+#line 36 "analisadorLexico.l"
+{ fprintf(outFile, "MAIS_TOK\n"); }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 251 "calcBasica.l"
+#line 37 "analisadorLexico.l"
+{ fprintf(outFile, "MENOS_TOK\n"); }
+	YY_BREAK
+case 22:
+YY_RULE_SETUP
+#line 38 "analisadorLexico.l"
+{ fprintf(outFile, "MULTIPLICA_TOK\n"); }
+	YY_BREAK
+case 23:
+YY_RULE_SETUP
+#line 39 "analisadorLexico.l"
+{ fprintf(outFile, "DIVIDE_TOK\n"); }
+	YY_BREAK
+case 24:
+YY_RULE_SETUP
+#line 40 "analisadorLexico.l"
+{ fprintf(outFile, "RESTO_TOK\n"); }
+	YY_BREAK
+case 25:
+YY_RULE_SETUP
+#line 41 "analisadorLexico.l"
+{ fprintf(outFile, "MAIOR_TOK\n"); }
+	YY_BREAK
+case 26:
+YY_RULE_SETUP
+#line 42 "analisadorLexico.l"
+{ fprintf(outFile, "IGUAL_TOK\n"); }
+	YY_BREAK
+case 27:
+YY_RULE_SETUP
+#line 44 "analisadorLexico.l"
+{ fprintf(outFile, "NUM_INT_TOK: %s\n", yytext); }
+	YY_BREAK
+case 28:
+YY_RULE_SETUP
+#line 45 "analisadorLexico.l"
+{ fprintf(outFile, "NUM_REAL_TOK: %s\n", yytext); }
+	YY_BREAK
+case 29:
+YY_RULE_SETUP
+#line 47 "analisadorLexico.l"
+{ fprintf(outFile, "IDENT_TOK: %s\n", yytext); }
+	YY_BREAK
+case 30:
+YY_RULE_SETUP
+#line 49 "analisadorLexico.l"
+{ fprintf(outFile, "STRING_TOK: %s\n", yytext); }
+	YY_BREAK
+case 31:
+YY_RULE_SETUP
+#line 51 "analisadorLexico.l"
+{ /* Ignorar espaços */ }
+	YY_BREAK
+case 32:
+YY_RULE_SETUP
+#line 52 "analisadorLexico.l"
+{ /* Ignorar quebras de linha */ }
+	YY_BREAK
+case 33:
+YY_RULE_SETUP
+#line 54 "analisadorLexico.l"
+{ fprintf(stderr, "Caractere inválido: %s\n", yytext); }
+	YY_BREAK
+case 34:
+YY_RULE_SETUP
+#line 56 "analisadorLexico.l"
 ECHO;
 	YY_BREAK
-#line 980 "lex.yy.c"
+#line 863 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1268,7 +1151,7 @@ static yy_state_type yy_get_previous_state()
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 112 )
+			if ( yy_current_state >= 134 )
 				yy_c = yy_meta[(unsigned int) yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
@@ -1303,11 +1186,11 @@ yy_state_type yy_current_state;
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 112 )
+		if ( yy_current_state >= 134 )
 			yy_c = yy_meta[(unsigned int) yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
-	yy_is_jam = (yy_current_state == 111);
+	yy_is_jam = (yy_current_state == 133);
 
 	return yy_is_jam ? 0 : yy_current_state;
 	}
@@ -1862,7 +1745,7 @@ int main()
 	return 0;
 	}
 #endif
-#line 251 "calcBasica.l"
+#line 56 "analisadorLexico.l"
 
 
 int main(int argc, char **argv) {
@@ -1871,6 +1754,7 @@ int main(int argc, char **argv) {
         return 1;
     }
 
+    // Abrir arquivo de entrada
     yyin = fopen(argv[1], "r");
     if (!yyin) {
         fprintf(stderr, "Erro ao abrir arquivo %s\n", argv[1]);
@@ -1880,34 +1764,20 @@ int main(int argc, char **argv) {
     char outFileName[256];
     snprintf(outFileName, sizeof(outFileName), "%s_saida.txt", argv[1]);
 
+    // Criar arquivo de saída
     outFile = fopen(outFileName, "w");
     if (!outFile) {
-        fprintf(stderr, "Erro ao criar arquivo de saída %s\n", outFileName);
+        fprintf(stderr, "Erro ao criar arquivo de saída.\n");
+        fclose(yyin);
         return 1;
     }
 
-    char treeFileName[256];
-    snprintf(treeFileName, sizeof(treeFileName), "%s_arvore_sintatica.txt", argv[1]);
-
-    FILE *treeFile = fopen(treeFileName, "w");
-    if (!treeFile) {
-        fprintf(stderr, "Erro ao criar arquivo de árvore sintática %s\n", treeFileName);
-        fclose(outFile);
-        return 1;
-    }
-
-    tree_stack = create_stack(100);
-
+    // Executar o analisador léxico
     yylex();
 
-    save_tree(root, treeFile, 0, 1);
-
+    // Fechar arquivos
     fclose(outFile);
-    fclose(treeFile);
     fclose(yyin);
-
-    free_tree(root);
-    free_stack(tree_stack);
 
     return 0;
 }
