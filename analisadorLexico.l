@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "tokens.h"
+#include "analisadorSintatico.tab.h"
 
 // Arquivo de saída para os tokens
 FILE *outFile;
@@ -13,78 +13,49 @@ FILE *outFile;
 
 %%
 
-PROGRAMA             { fprintf(outFile, "PROGRAMA_TOK\n"); }
-INICIO               { fprintf(outFile, "INICIO_TOK\n"); }
-FIM                  { fprintf(outFile, "FIM_TOK\n"); }
-DECLARACOES          { fprintf(outFile, "DECLARACOES_TOK\n"); }
-ALGORITMO            { fprintf(outFile, "ALGORITMO_TOK\n"); }
-INTEIRO              { fprintf(outFile, "INTEIRO_TOK\n"); }
-REAL                 { fprintf(outFile, "REAL_TOK\n"); }
-CARACTER             { fprintf(outFile, "CARACTER_TOK\n"); }
-CADEIA               { fprintf(outFile, "CADEIA_TOK\n"); }
-LISTA_INT            { fprintf(outFile, "LISTA_INT_TOK\n"); }
-LISTA_REAL           { fprintf(outFile, "LISTA_REAL_TOK\n"); }
-LEIA                 { fprintf(outFile, "LEIA_TOK\n"); }
-ESCREVA              { fprintf(outFile, "ESCREVA_TOK\n"); }
-SE                   { fprintf(outFile, "SE_TOK\n"); }
-ENTAO                { fprintf(outFile, "ENTAO_TOK\n"); }
-FIM_SE               { fprintf(outFile, "FIM_SE_TOK\n"); }
-ENQUANTO             { fprintf(outFile, "ENQUANTO_TOK\n"); }
-FIM_ENQUANTO         { fprintf(outFile, "FIM_ENQUANTO_TOK\n"); }
+PROGRAMA             { printf("Token: PROGRAMA\n"); return PROGRAMA_TOK;  }
+INICIO               { printf("Token: INICIO\n"); return INICIO_TOK; }
+FIM                  { printf("Token: FIM\n"); return FIM_TOK; }
+DECLARACOES          { printf("Token: DECLARACOES\n"); return DECLARACOES_TOK; }
+ALGORITMO            { printf("Token: ALGORITMO\n"); return ALGORITMO_TOK; }
+INTEIRO              { printf("Token: INTEIRO\n"); return INTEIRO_TOK; }
+REAL                 { printf("Token: REAL\n"); return REAL_TOK; }
+CARACTER             { printf("Token: CARACTER\n"); return CARACTER_TOK; }
+CADEIA               { printf("Token: CADEIA\n"); return CADEIA_TOK; }
+LISTA_INT            { printf("Token: LISTA_INT\n"); return LISTA_INT_TOK; }
+LISTA_REAL           { printf("Token: LISTA_REAL\n"); return LISTA_REAL_TOK; }
+LEIA                 { printf("Token: LEIA\n"); return LEIA_TOK; }
+ESCREVA              { printf("Token: ESCREVA\n"); return ESCREVA_TOK; }
+SE                   { printf("Token: SE\n"); return SE_TOK; }
+ENTAO                { printf("Token: ENTAO\n"); return ENTAO_TOK; }
+FIM_SE               { printf("Token: FIM_SE\n"); return FIM_SE_TOK; }
+ENQUANTO             { printf("Token: ENQUANTO\n"); return ENQUANTO_TOK; }
+FIM_ENQUANTO         { printf("Token: FIM_ENQUANTO\n"); return FIM_ENQUANTO_TOK; }
 
-":="                 { fprintf(outFile, "ATRIBUICAO_TOK\n"); }
-"+"                  { fprintf(outFile, "MAIS_TOK\n"); }
-"-"                  { fprintf(outFile, "MENOS_TOK\n"); }
-"*"                  { fprintf(outFile, "MULTIPLICA_TOK\n"); }
-"/"                  { fprintf(outFile, "DIVIDE_TOK\n"); }
-"%"                  { fprintf(outFile, "RESTO_TOK\n"); }
-"\.M\."              { fprintf(outFile, "MAIOR_TOK\n"); }
-"\.I\."              { fprintf(outFile, "IGUAL_TOK\n"); }
+","                  { printf("Token: VIRGULA\n"); return VIRGULA_TOK; }
+":="                 { printf("Token: ATRIBUICAO\n"); return ATRIBUICAO_TOK; }
+"+"                  { printf("Token: MAIS\n"); return MAIS_TOK; }
+"-"                  { printf("Token: MENOS\n"); return MENOS_TOK; }
+"*"                  { printf("Token: MULTIPLICA\n"); return MULTIPLICA_TOK; }
+"/"                  { printf("Token: DIVIDE\n"); return DIVIDE_TOK; }
+"%"                  { printf("Token: RESTO\n"); return RESTO_TOK; }
+"\.M\."              { printf("Token: MAIOR\n"); return MAIOR_TOK; }
+"\.I\."              { printf("Token: IGUAL\n"); return IGUAL_TOK; }
+"\["                { printf("Token: ABRE_COLCHETE\n"); return ABRE_COLCHETE_TOK; }
+"\]"                { printf("Token: FECHA_COLCHETE\n"); return FECHA_COLCHETE_TOK; }
 
-[0-9]+               { fprintf(outFile, "NUM_INT_TOK: %s\n", yytext); }
-[0-9]+"."[0-9]+      { fprintf(outFile, "NUM_REAL_TOK: %s\n", yytext); }
+[0-9]+               { printf("Token: NUM_INT\n"); return NUM_INT_TOK; }
+[0-9]+"\\."[0-9]+    { printf("Token: NUM_REAL\n"); return NUM_REAL_TOK; }
 
-[a-zA-Z][a-zA-Z0-9]* { fprintf(outFile, "IDENT_TOK: %s\n", yytext); }
+[a-zA-Z_][a-zA-Z0-9_]* { printf("Token: IDENT\n"); return IDENT_TOK; }
 
-\'[^\']*\'           { fprintf(outFile, "STRING_TOK: %s\n", yytext); }
+\'[^\']*\'           { printf("Token: STRING\n"); return STRING_TOK; }
 
-[ \t]+               { /* Ignorar espaços */ }
-\n                   { /* Ignorar quebras de linha */ }
+\{[^\}]*\}           { printf("Ignorando comentário\n"); }
 
-.                    { fprintf(stderr, "Caractere inválido: %s\n", yytext); }
+[ \t]+               { printf("Ignorando espaços em branco\n"); }
+\n                   { printf("Ignorando quebras de linha\n"); }
+
+.                    { printf("Caractere inválido\n"); }
 
 %%
-
-int main(int argc, char **argv) {
-    if (argc < 2) {
-        fprintf(stderr, "Uso: %s <arquivo_entrada>\n", argv[0]);
-        return 1;
-    }
-
-    // Abrir arquivo de entrada
-    yyin = fopen(argv[1], "r");
-    if (!yyin) {
-        fprintf(stderr, "Erro ao abrir arquivo %s\n", argv[1]);
-        return 1;
-    }
-
-    char outFileName[256];
-    snprintf(outFileName, sizeof(outFileName), "%s_anLexico_saida.txt", argv[1]);
-
-    // Criar arquivo de saída
-    outFile = fopen(outFileName, "w");
-    if (!outFile) {
-        fprintf(stderr, "Erro ao criar arquivo de saída.\n");
-        fclose(yyin);
-        return 1;
-    }
-
-    // Executar o analisador léxico
-    yylex();
-
-    // Fechar arquivos
-    fclose(outFile);
-    fclose(yyin);
-
-    return 0;
-}

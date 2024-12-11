@@ -1,8 +1,8 @@
 PROGRAMA fatorial_exemplo
 INICIO
-{DECLARACOES }
+DECLARACOES
 INTEIRO argumento, fatorial
-{ALGORITMO }
+ALGORITMO
 { Calcula o fatorial de um número inteiro }
 LEIA argumento
 fatorial := argumento
@@ -11,7 +11,7 @@ ENTAO fatorial := 1
 FIM_SE
 ENQUANTO argumento .M. 1
 fatorial := fatorial * argumento
-argumento := argumento – 1
+argumento := argumento - 1
 FIM_ENQUANTO
 ESCREVA 'fatorial = ', fatorial
 FIM

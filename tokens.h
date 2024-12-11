@@ -31,5 +31,6 @@
 #define NUM_INT_TOK 27
 #define NUM_REAL_TOK 28
 #define IDENT_TOK 29
+#define STRING_TOK 30
 
 #endif

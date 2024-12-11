@@ -1,9 +1,9 @@
-PROGRAMA leitura de lista
+PROGRAMA leitura_de_lista
 INICIO
-{DECLARACOES }
+DECLARACOES
 INTEIRO n, i, k, x
 LISTA_INT A[100]
-{ALGORITMO}
+ALGORITMO
 {armazena os dados da lista}
 ESCREVA 'quantos números vai armazenar?'
 LEIA n
@@ -20,6 +20,6 @@ k := 1
 ENQUANTO n .M. k
 ESCREVA A[k], ' '
 k := k+1
-FIM-ENQUANTO
+FIM_ENQUANTO
 ESCREVA ' soma dos valores armazenados = ' , x
 FIM
