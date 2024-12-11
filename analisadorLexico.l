@@ -69,7 +69,7 @@ int main(int argc, char **argv) {
     }
 
     char outFileName[256];
-    snprintf(outFileName, sizeof(outFileName), "%s_saida.txt", argv[1]);
+    snprintf(outFileName, sizeof(outFileName), "%s_anLexico_saida.txt", argv[1]);
 
     // Criar arquivo de saída
     outFile = fopen(outFileName, "w");
