@@ -590,9 +590,9 @@ static const yytype_int8 yytranslate[] =
 static const yytype_int16 yyrline[] =
 {
        0,    77,    77,    83,    89,    92,    98,   102,   109,   113,
-     117,   121,   125,   129,   136,   140,   144,   151,   157,   160,
-     166,   169,   172,   177,   180,   186,   190,   193,   204,   208,
-     212,   219,   223,   227,   234,   242,   246,   250,   262,   267
+     117,   121,   125,   129,   136,   148,   160,   175,   181,   184,
+     190,   193,   196,   201,   204,   210,   214,   217,   228,   232,
+     236,   243,   247,   251,   258,   266,   270,   274,   286,   291
 };
 #endif
 
@@ -1305,115 +1305,139 @@ yyreduce:
   case 14: /* lista_variaveis: IDENT_TOK  */
 #line 136 "analisadorSemantico.y"
               {
+        if ((yyvsp[0].tipo) == NULL) {
+            yyerror("Variável não definida.");
+            exit(1);
+        }
+        if ((yyvsp[0].tipo) == NULL) {
+            yyerror("Tipo não definido para a variável.");
+            exit(1);
+        }
         adicionar_simbolo((yyvsp[0].tipo), (yyvsp[0].tipo), 0);
         printf("Reconhecida variável '%s' do tipo '%s'.\n", (yyvsp[0].tipo), (yyvsp[0].tipo));
     }
-#line 1312 "analisadorSemantico.tab.c"
+#line 1320 "analisadorSemantico.tab.c"
     break;
 
   case 15: /* lista_variaveis: IDENT_TOK ABRE_COLCHETE_TOK NUM_INT_TOK FECHA_COLCHETE_TOK  */
-#line 140 "analisadorSemantico.y"
+#line 148 "analisadorSemantico.y"
                                                                  {
+        if ((yyvsp[-3].tipo) == NULL) {
+            yyerror("Tipo não definido para a lista.");
+            exit(1);
+        }
+        if ((yyvsp[-3].tipo) == NULL) {
+            yyerror("Lista não definida.");
+            exit(1);
+        }
         adicionar_simbolo((yyvsp[-3].tipo), (yyvsp[-3].tipo), atoi((yyvsp[-1].tipo)));
         printf("Reconhecida lista '%s' do tipo '%s' com tamanho %d.\n", (yyvsp[-3].tipo), (yyvsp[-3].tipo), atoi((yyvsp[-1].tipo)));
     }
-#line 1321 "analisadorSemantico.tab.c"
+#line 1337 "analisadorSemantico.tab.c"
     break;
 
   case 16: /* lista_variaveis: IDENT_TOK VIRGULA_TOK lista_variaveis  */
-#line 144 "analisadorSemantico.y"
+#line 160 "analisadorSemantico.y"
                                             {
+        if ((yyvsp[-2].tipo) == NULL) {
+            yyerror("Variável não definida.");
+            exit(1);
+        }
+        if ((yyvsp[-2].tipo) == NULL) {
+            yyerror("Tipo não definido para a variável.");
+            exit(1);
+        }
         adicionar_simbolo((yyvsp[-2].tipo), (yyvsp[-2].tipo), 0);
         printf("Reconhecida variável '%s' do tipo '%s'.\n", (yyvsp[-2].tipo), (yyvsp[-2].tipo));
-    }
-#line 1330 "analisadorSemantico.tab.c"
-    break;
-
-  case 17: /* algoritmo: ALGORITMO_TOK lista_comandos  */
-#line 151 "analisadorSemantico.y"
-                                 {
-        printf("Reconhecido algoritmo.\n");
-    }
-#line 1338 "analisadorSemantico.tab.c"
-    break;
-
-  case 18: /* lista_comandos: comando lista_comandos  */
-#line 157 "analisadorSemantico.y"
-                           {
-        printf("Reconhecida lista de comandos.\n");
-    }
-#line 1346 "analisadorSemantico.tab.c"
-    break;
-
-  case 19: /* lista_comandos: %empty  */
-#line 160 "analisadorSemantico.y"
-                  {
-        printf("Lista de comandos vazia.\n");
     }
 #line 1354 "analisadorSemantico.tab.c"
     break;
 
-  case 20: /* comando: LEIA_TOK lista_variaveis  */
-#line 166 "analisadorSemantico.y"
-                             {
-        printf("Reconhecido comando de leitura.\n");
+  case 17: /* algoritmo: ALGORITMO_TOK lista_comandos  */
+#line 175 "analisadorSemantico.y"
+                                 {
+        printf("Reconhecido algoritmo.\n");
     }
 #line 1362 "analisadorSemantico.tab.c"
     break;
 
-  case 21: /* comando: ESCREVA_TOK lista_escreva  */
-#line 169 "analisadorSemantico.y"
-                                {
-        printf("Reconhecido comando de escrita.\n");
+  case 18: /* lista_comandos: comando lista_comandos  */
+#line 181 "analisadorSemantico.y"
+                           {
+        printf("Reconhecida lista de comandos.\n");
     }
 #line 1370 "analisadorSemantico.tab.c"
     break;
 
+  case 19: /* lista_comandos: %empty  */
+#line 184 "analisadorSemantico.y"
+                  {
+        printf("Lista de comandos vazia.\n");
+    }
+#line 1378 "analisadorSemantico.tab.c"
+    break;
+
+  case 20: /* comando: LEIA_TOK lista_variaveis  */
+#line 190 "analisadorSemantico.y"
+                             {
+        printf("Reconhecido comando de leitura.\n");
+    }
+#line 1386 "analisadorSemantico.tab.c"
+    break;
+
+  case 21: /* comando: ESCREVA_TOK lista_escreva  */
+#line 193 "analisadorSemantico.y"
+                                {
+        printf("Reconhecido comando de escrita.\n");
+    }
+#line 1394 "analisadorSemantico.tab.c"
+    break;
+
   case 22: /* comando: IDENT_TOK ATRIBUICAO_TOK expressao  */
-#line 172 "analisadorSemantico.y"
+#line 196 "analisadorSemantico.y"
                                          {
         char* tipo_var = buscar_tipo((yyvsp[-2].tipo));
         verificar_tipos(tipo_var, (yyvsp[0].tipo));
         printf("Reconhecido comando de atribuição para '%s'.\n", (yyvsp[-2].tipo));
     }
-#line 1380 "analisadorSemantico.tab.c"
+#line 1404 "analisadorSemantico.tab.c"
     break;
 
   case 23: /* comando: SE_TOK expressao_relacional ENTAO_TOK lista_comandos FIM_SE_TOK  */
-#line 177 "analisadorSemantico.y"
+#line 201 "analisadorSemantico.y"
                                                                       {
         printf("Reconhecido comando condicional.\n");
     }
-#line 1388 "analisadorSemantico.tab.c"
+#line 1412 "analisadorSemantico.tab.c"
     break;
 
   case 24: /* comando: ENQUANTO_TOK expressao_relacional lista_comandos FIM_ENQUANTO_TOK  */
-#line 180 "analisadorSemantico.y"
+#line 204 "analisadorSemantico.y"
                                                                         {
         printf("Reconhecido comando de loop.\n");
     }
-#line 1396 "analisadorSemantico.tab.c"
+#line 1420 "analisadorSemantico.tab.c"
     break;
 
   case 25: /* lista_escreva: IDENT_TOK  */
-#line 186 "analisadorSemantico.y"
+#line 210 "analisadorSemantico.y"
               {
         buscar_tipo((yyvsp[0].tipo)); // Verifica se a variável foi declarada
         printf("Reconhecido elemento para escrita: '%s'.\n", (yyvsp[0].tipo));
     }
-#line 1405 "analisadorSemantico.tab.c"
+#line 1429 "analisadorSemantico.tab.c"
     break;
 
   case 26: /* lista_escreva: STRING_TOK  */
-#line 190 "analisadorSemantico.y"
+#line 214 "analisadorSemantico.y"
                  {
         printf("Reconhecida string para escrita.\n");
     }
-#line 1413 "analisadorSemantico.tab.c"
+#line 1437 "analisadorSemantico.tab.c"
     break;
 
   case 27: /* lista_escreva: IDENT_TOK ABRE_COLCHETE_TOK expressao FECHA_COLCHETE_TOK  */
-#line 193 "analisadorSemantico.y"
+#line 217 "analisadorSemantico.y"
                                                                {
         char* tipo_var = buscar_tipo((yyvsp[-3].tipo));
         if (tipo_var == NULL) {
@@ -1422,65 +1446,65 @@ yyreduce:
         }
         printf("Reconhecido acesso à lista '%s'.\n", (yyvsp[-3].tipo));
     }
-#line 1426 "analisadorSemantico.tab.c"
+#line 1450 "analisadorSemantico.tab.c"
     break;
 
   case 28: /* expressao: expressao MAIS_TOK termo  */
-#line 204 "analisadorSemantico.y"
+#line 228 "analisadorSemantico.y"
                              {
         (yyval.tipo) = (yyvsp[-2].tipo); // Herda o tipo do lado esquerdo
         printf("Reconhecida expressão de adição.\n");
     }
-#line 1435 "analisadorSemantico.tab.c"
+#line 1459 "analisadorSemantico.tab.c"
     break;
 
   case 29: /* expressao: expressao MENOS_TOK termo  */
-#line 208 "analisadorSemantico.y"
+#line 232 "analisadorSemantico.y"
                                 {
         (yyval.tipo) = (yyvsp[-2].tipo); // Herda o tipo do lado esquerdo
         printf("Reconhecida expressão de subtração.\n");
     }
-#line 1444 "analisadorSemantico.tab.c"
+#line 1468 "analisadorSemantico.tab.c"
     break;
 
   case 30: /* expressao: termo  */
-#line 212 "analisadorSemantico.y"
+#line 236 "analisadorSemantico.y"
             {
         (yyval.tipo) = (yyvsp[0].tipo); // Herda o tipo diretamente
         printf("Reconhecido termo.\n");
     }
-#line 1453 "analisadorSemantico.tab.c"
+#line 1477 "analisadorSemantico.tab.c"
     break;
 
   case 31: /* termo: termo MULTIPLICA_TOK fator  */
-#line 219 "analisadorSemantico.y"
+#line 243 "analisadorSemantico.y"
                                {
         (yyval.tipo) = (yyvsp[-2].tipo); // Herda o tipo do lado esquerdo
         printf("Reconhecida expressão de multiplicação.\n");
     }
-#line 1462 "analisadorSemantico.tab.c"
+#line 1486 "analisadorSemantico.tab.c"
     break;
 
   case 32: /* termo: termo DIVIDE_TOK fator  */
-#line 223 "analisadorSemantico.y"
+#line 247 "analisadorSemantico.y"
                              {
         (yyval.tipo) = (yyvsp[-2].tipo); // Herda o tipo do lado esquerdo
         printf("Reconhecida expressão de divisão.\n");
     }
-#line 1471 "analisadorSemantico.tab.c"
+#line 1495 "analisadorSemantico.tab.c"
     break;
 
   case 33: /* termo: fator  */
-#line 227 "analisadorSemantico.y"
+#line 251 "analisadorSemantico.y"
             {
         (yyval.tipo) = (yyvsp[0].tipo); // Herda o tipo diretamente
         printf("Reconhecido fator.\n");
     }
-#line 1480 "analisadorSemantico.tab.c"
+#line 1504 "analisadorSemantico.tab.c"
     break;
 
   case 34: /* fator: IDENT_TOK  */
-#line 234 "analisadorSemantico.y"
+#line 258 "analisadorSemantico.y"
               {
         (yyval.tipo) = buscar_tipo((yyvsp[0].tipo));
         if ((yyval.tipo) == NULL) {
@@ -1489,29 +1513,29 @@ yyreduce:
         }
         printf("Reconhecido identificador '%s'.\n", (yyvsp[0].tipo));
     }
-#line 1493 "analisadorSemantico.tab.c"
+#line 1517 "analisadorSemantico.tab.c"
     break;
 
   case 35: /* fator: NUM_INT_TOK  */
-#line 242 "analisadorSemantico.y"
+#line 266 "analisadorSemantico.y"
                   {
         (yyval.tipo) = strdup("inteiro");
         printf("Reconhecido número inteiro.\n");
     }
-#line 1502 "analisadorSemantico.tab.c"
+#line 1526 "analisadorSemantico.tab.c"
     break;
 
   case 36: /* fator: NUM_REAL_TOK  */
-#line 246 "analisadorSemantico.y"
+#line 270 "analisadorSemantico.y"
                    {
         (yyval.tipo) = strdup("real");
         printf("Reconhecido número real.\n");
     }
-#line 1511 "analisadorSemantico.tab.c"
+#line 1535 "analisadorSemantico.tab.c"
     break;
 
   case 37: /* fator: IDENT_TOK ABRE_COLCHETE_TOK expressao FECHA_COLCHETE_TOK  */
-#line 250 "analisadorSemantico.y"
+#line 274 "analisadorSemantico.y"
                                                                {
         char* tipo_lista = buscar_tipo((yyvsp[-3].tipo));
         if (tipo_lista == NULL) {
@@ -1521,31 +1545,31 @@ yyreduce:
         (yyval.tipo) = tipo_lista;
         printf("Reconhecido acesso à lista '%s'.\n", (yyvsp[-3].tipo));
     }
-#line 1525 "analisadorSemantico.tab.c"
+#line 1549 "analisadorSemantico.tab.c"
     break;
 
   case 38: /* expressao_relacional: expressao MAIOR_TOK expressao  */
-#line 262 "analisadorSemantico.y"
+#line 286 "analisadorSemantico.y"
                                   {
         verificar_tipos((yyvsp[-2].tipo), (yyvsp[0].tipo));
         (yyval.tipo) = strdup("booleano");
         printf("Reconhecida expressão relacional de maior.\n");
     }
-#line 1535 "analisadorSemantico.tab.c"
+#line 1559 "analisadorSemantico.tab.c"
     break;
 
   case 39: /* expressao_relacional: expressao IGUAL_TOK expressao  */
-#line 267 "analisadorSemantico.y"
+#line 291 "analisadorSemantico.y"
                                     {
         verificar_tipos((yyvsp[-2].tipo), (yyvsp[0].tipo));
         (yyval.tipo) = strdup("booleano");
         printf("Reconhecida expressão relacional de igualdade.\n");
     }
-#line 1545 "analisadorSemantico.tab.c"
+#line 1569 "analisadorSemantico.tab.c"
     break;
 
 
-#line 1549 "analisadorSemantico.tab.c"
+#line 1573 "analisadorSemantico.tab.c"
 
       default: break;
     }
@@ -1738,7 +1762,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 274 "analisadorSemantico.y"
+#line 298 "analisadorSemantico.y"
 
 
 /* Funções auxiliares */

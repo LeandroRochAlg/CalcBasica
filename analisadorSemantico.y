@@ -134,14 +134,30 @@ tipo:
 
 lista_variaveis:
     IDENT_TOK {
+        if ($<tipo>1 == NULL) {
+            yyerror("Tipo não definido para a variável.");
+            exit(1);
+        }
+        if ($1 == NULL) {
+            yyerror("Variável não definida.");
+            exit(1);
+        }
         adicionar_simbolo($1, $<tipo>1, 0);
         printf("Reconhecida variável '%s' do tipo '%s'.\n", $1, $<tipo>1);
     }
     | IDENT_TOK ABRE_COLCHETE_TOK NUM_INT_TOK FECHA_COLCHETE_TOK {
+        if ($<tipo>1 == NULL) {
+            yyerror("Tipo não definido para a lista.");
+            exit(1);
+        }
         adicionar_simbolo($1, $<tipo>1, atoi($3));
         printf("Reconhecida lista '%s' do tipo '%s' com tamanho %d.\n", $1, $<tipo>1, atoi($3));
     }
     | IDENT_TOK VIRGULA_TOK lista_variaveis {
+        if ($<tipo>1 == NULL) {
+            yyerror("Tipo não definido para a variável.");
+            exit(1);
+        }
         adicionar_simbolo($1, $<tipo>1, 0);
         printf("Reconhecida variável '%s' do tipo '%s'.\n", $1, $<tipo>1);
     }
